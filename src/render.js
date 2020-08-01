@@ -9,4 +9,15 @@ async function getVideoSources() {
   const inputSources = await desktopCapturer.getSources({
     types: ['window', 'screen']
   });
+
+  const videoOptionsMenus = Menu.buildFromTemplate(
+    inputSources.map(source => {
+      return {
+        label: source.name,
+        click: () => selectSource(source)
+      };
+    })
+  );
+
+  videoOptionsMenus.popup();
 }

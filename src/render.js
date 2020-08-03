@@ -3,10 +3,20 @@ videoSelectBtn = getVideoSources;
 
 const { desktopCapturer, remote } = require('electron');
 const { dialog, Menu } = remote;
-
+z
 // Global state
 let mediaRecorder; // MediaRecorder instance to capture footage
 const recordedChunks = [];
+
+// Buttons
+const videoElement = document.querySelector('video');
+
+const startBtn = document.getElementById('startBtn');
+startBtn.onclick = e => {
+  mediaRecorder.start();
+  startBtn.classList.add('is-danger');
+  startBtn.innerText = 'Recording';
+};
 
 // Get the available video sources
 async function getVideoSources() {

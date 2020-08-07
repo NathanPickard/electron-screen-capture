@@ -44,3 +44,18 @@ async function getVideoSources() {
 
   videoOptionsMenus.popup();
 }
+
+// Change the videoSource window to record
+async function selectSource(source) {
+  videoSelectBtn.innerText = source.name;
+
+  const constraints = {
+    audio: false,
+    video: {
+      mandatory: {
+        chromeMediaSource: 'desktop',
+        chromeMediaSource: source.id
+      }
+    }
+  };
+}

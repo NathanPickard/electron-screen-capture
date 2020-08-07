@@ -59,3 +59,15 @@ async function selectSource(source) {
     }
   };
 }
+
+// Create a stream
+const stream = await navigator.mediaDevices.getUserMedia(contraints);
+
+// Preview the source in a video element
+videoElement.srcObject = stream;
+videoElement.play();
+
+// Create the Media Recorder
+const options = { mimeType: 'video/webm; codecs:vp9;' };
+mediaRecorder = new mediaRecorder(stream, options);
+

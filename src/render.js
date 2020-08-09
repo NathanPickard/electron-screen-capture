@@ -71,3 +71,7 @@ videoElement.play();
 const options = { mimeType: 'video/webm; codecs:vp9;' };
 mediaRecorder = new mediaRecorder(stream, options);
 
+// Register Event Handlers
+mediaRecorder.ondataavailable = handleDataAvailable;
+mediaRecorder.onstop = handleStop;
+

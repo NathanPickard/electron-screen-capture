@@ -1,5 +1,6 @@
 
 const { desktopCapturer, remote } = require('electron');
+const { writeFile } = require('fs');
 const { dialog, Menu } = remote;
 
 // Global state
@@ -79,4 +80,24 @@ mediaRecorder.onstop = handleStop;
 function handleDataAvailable(e) {
   console.log('video data available');
   recordedChunks.push(e.data);
+}
+
+// Saves the video file on stop
+async function handleStop(e) {
+  const blob = new Blob(recordedChunks, {
+    type: 'video/webm; codecs=vp9'
+  });
+
+
+  const buffer = Bugger.from(await blob.arrayBuffer());
+
+  const { filePath } = await dialog.showSaveDialog({
+    buttonLabel: 'Save video',
+    defaultPath: `vid-${Date.now()}.webm`
+  });
+
+  if (filePath) {
+    writeFile(filePath, buffer, () => console.log('video save successfully!'));
+  }
+
 }

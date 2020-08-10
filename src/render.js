@@ -75,3 +75,8 @@ mediaRecorder = new mediaRecorder(stream, options);
 mediaRecorder.ondataavailable = handleDataAvailable;
 mediaRecorder.onstop = handleStop;
 
+// Captures all recorded chunks
+function handleDataAvailable(e) {
+  console.log('video data available');
+  recordedChunks.push(e.data);
+}
